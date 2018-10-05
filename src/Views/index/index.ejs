@@ -1,0 +1,72 @@
+<% include ../template/topbar.ejs %>
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-xl-12">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Funcionários</div>
+                                    <div class="stat-digit"><%=counts.employer%></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="fa fa-laptop text-success border-success"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Computadores</div>
+                                    <div class="stat-digit"><%=counts.computer%></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="fa fa-phone text-warning border-warning"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Celulares</div>
+                                    <div class="stat-digit"><%=counts.phone%></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="ti-link text-danger border-danger"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Usuários</div>
+                                    <div class="stat-digit">5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <% include ../template/footer.ejs  %>

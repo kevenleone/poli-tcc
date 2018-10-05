@@ -1,0 +1,167 @@
+<% include ../template/topbar.ejs %>
+<script type="text/javascript">
+	$(document).ready(function(){
+    showOrBlock = function(show_or_block){
+      if(show_or_block == 'block'){
+        $('.nome').attr('disabled', 'disabled');
+        $('.email').attr('disabled', 'disabled');
+        $('.login').attr('disabled', 'disabled');
+        $('.senha').attr('disabled', 'disabled');
+        $('.nivel_acesso_id').attr('disabled', 'disabled');
+      } else {
+        $('.nome').removeAttr('disabled');
+        $('.email').removeAttr('disabled');
+        $('.senha').removeAttr('disabled');
+        $('.login').removeAttr('disabled');
+        $('.nivel_acesso_id').removeAttr('disabled');
+      }
+    }
+
+    create = function(){
+      $('#action').val('create');
+      $('.nome').val('');
+      $('.email').val('');
+      $('.login').val('');
+      $('.nivel_acesso_id').val('');
+      $('.id_usuario').val('');
+      $('#submit').val('Cadastrar');
+      showOrBlock('show');
+    }
+ 
+    getSetValues = function(id, show_or_block){
+      var nome = $('#nome_'+id)[0].innerHTML;
+      var email = $('#email_'+id)[0].innerHTML;
+      var login = $('#login_'+id)[0].innerHTML;
+      var nivel_acesso = $('#nivel_acesso_'+id)[0].innerHTML;
+
+      $('.nome').val(nome);
+      $('.email').val(email);
+      $('.login').val(login);
+      $('.nivel_acesso_id').val(nivel_acesso);
+      $('.id_usuario').val(id);
+
+      showOrBlock(show_or_block);
+    }
+  
+    update = function(id){
+      id = id.value;
+      $('#submit').show();
+      $('#submit').val('Atualizar');
+      $('#action').val('update');
+      getSetValues(id, 'show');
+    }
+
+    view = function(id){
+      id = id.value;
+      $('#submit').hide();
+      $('#action').val('view');
+      getSetValues(id, 'block');
+    }
+	})
+</script>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Usuários</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body card-block">
+                                    <table class="datatable table table-striped table-bordered">
+                                            <thead>
+                                              <tr>
+                                                <th>Usuário</th>
+                                                <th>Email</th>
+                                                <th>Login</th>
+                                                <th>Nível Acesso</th>
+                                                <th>Ações</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%for(u=0;u<usuarios.length;u++){%>
+                                            <tr>
+                                                <td id="nome_<%=usuarios[u].id_usuarios%>"><%=usuarios[u].nome%></td>
+                                                <td id="email_<%=usuarios[u].id_usuarios%>"><%=usuarios[u].email%></td>
+                                                <td id="login_<%=usuarios[u].id_usuarios%>"><%=usuarios[u].login%></td>
+                                                <td id="nivel_acesso_<%=usuarios[u].id_usuarios%>"><%=usuarios[u].nivel_acesso%></td>
+                                                <td>
+                                                <button value="<%=usuarios[u].id_usuarios%>" title="Visualizar Usuário" onClick="view(this)" data-toggle="modal" data-target="#usuarioModal" class="btn btn-secondary"><i class="fa fa-eye"></i></button>
+                                                <button value="<%=usuarios[u].id_usuarios%>" title="Editar Usuário" onClick="update(this)" data-toggle="modal" data-target="#usuarioModal" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                                                </td>
+                                                </td>
+                                              </tr> 
+                                              <% } %>
+                                            </tbody>
+                                          </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                      <div class="modal fade" id="usuarioModal" tabindex="-1" role="dialog" aria-labelledby="usuarioModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="usuarioModalLabel">Usuários</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <form action="../processar/completo/usuario.php" method="post">
+                                        <input class="form-control id_usuario" name="id_usuario" type="hidden">
+                                  <input type="hidden" name="action" id="action" value="">
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label>Nome Usuário</label>
+                                          <input type="text" name="nome" class="form-control nome">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label>Nível Acesso</label>
+                                          <select class="form-control nivel_acesso_id" name="nivel_acesso_id">
+                                          <option value="1"> Administrador </option>
+                                          <option value="2"> Usuário </option>
+                                          <option value="3"> Médica </option>
+                                          <option value="5"> Enfermeira </option>
+                                          <option value="6"> Nutricionista </option>
+                                          </select>
+                                        </div>
+                                        </div>
+                                 
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label>Email</label>
+                                          <input type="email" class="form-control email" required name="email">
+                                        </div>
+                                        </div>
+                            
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label>Login</label>
+                                          <input type="text" class="form-control login" required name="login">
+                                        </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label>Senha</label>
+                                          <input type="password" class="form-control senha" name="senha">
+                                        </div>
+                                        </div>   
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                      <input type="submit" id="submit" value="Cadastrar" class="btn btn-primary">
+                                    </div>
+                                  </div>
+                                  </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% include ../template/footer.ejs  %>

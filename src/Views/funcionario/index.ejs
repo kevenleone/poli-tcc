@@ -1,0 +1,47 @@
+<% include ../template/topbar.ejs %>
+
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Funcionários</strong>
+                        </div>
+                        <div class="card-body">
+                        <div class="col-md-12">
+                        <a href="funcionario/cadastrar" class="btn btn-outline-secondary pull-right"><i class="fa fa-briefcase"></i> Cadastrar Funcionário</a>
+                    </div>
+                        <br><br>
+                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Funcionário</th>
+                        <th>CPF</th>
+                        <th>Cargo</th>
+                        <th>Setor</th>
+                        <th>Telefone</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% for(i=0; i<employer.length;i++){ %>
+                      <tr>
+                        <td> <%=employer[i].nome%></td>
+                        <td> <%=employer[i].cpf%> </td>
+                        <td> <%=employer[i].cargo%> </td>
+                        <td> <%=employer[i].setor%> </td>
+                        <td> <%=employer[i].telefone%> </td>
+                        <td> <a title="Visualizar" href="employer/<%=employer[i].id_employer%>" class="btn btn-outline-primary" href="#"><i class="fa fa-eye"></i></a>
+                        <a onclick="return confirm('Tem certeza que deseja remover esta employer?')" href="employer/d/<%=employer[i].id_employer%>" title="Remover" class="btn btn-outline-danger" ><i class="fa fa-trash"></i></button></td>
+                      </tr>
+
+                      <% } %>
+                    </tbody>
+                  </table>
+                        </div>
+                    </div>
+                </div>
+
+    <% include ../template/footer.ejs  %>

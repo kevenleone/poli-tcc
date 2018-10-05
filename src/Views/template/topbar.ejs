@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <title>Pousada</title>
+    <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
+    <link rel="stylesheet" href="http://localhost:3000/css/normalize.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/bootstrap.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/themify-icons.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/flag-icon.min.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/tag.css">
+    <link rel="stylesheet" href="http://localhost:3000/scss/style.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link href="http://localhost:3000/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="http://localhost:3000/js/util.js"></script>
+    <script src="http://localhost:3000/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="https://rawgit.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
+
+   
+</head>
+<body>
+
+    <% include sidebar.ejs %>
+    <div id="right-panel" class="right-panel">
+        <header id="header" class="header">
+            <div class="header-menu">
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="search-form">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="http://localhost:3000/images/admin.jpg" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                                <a class="nav-link" href="/sair"><i class="fa fa-power-off"></i> Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+ 

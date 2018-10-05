@@ -1,0 +1,54 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mivan Controller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="scss/style.css">
+</head>
+<body class="bg-dark">
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-form">
+                    <form action="/login" method="post">
+                        <div class="form-group">
+                            <label>Usuário</label>
+                            <input type="text" value="<%=dadosLogin.usuario%>" name="usuario" class="form-control" placeholder="Usuário">
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" value="<%=dadosLogin.senha%>" name="senha" class="form-control" placeholder="Senha">
+                        </div>
+                        <% if(mensagem.length > 0 || notFound){ %>
+                            <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                   Não foi possível acessar o sistema, causas:
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <ul>
+                                    <%for(i=0;i<mensagem.length;i++){%>
+                                    <li style="margin-left:15px"><%=mensagem[i].msg%></li>
+                                    <%}%>
+                                </ul>
+                                <ul>
+                                    <%if(notFound){%>
+                                    <li style="margin-left:15px"><%=notFound%></li>
+                                    <%}%>
+                                    </ul>
+                            </div>
+                        <% } %>
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

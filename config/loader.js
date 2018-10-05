@@ -16,10 +16,13 @@ server.use((req, res, next) => {
     next();
 });
 
-consign.include("src/Controllers")
-    .then("src/Models")
+server.set('view engine', 'ejs');
+server.set('views', './src/Views');
+server.use(express.static('./src/Views/public'));
+
+consign.include("src/Models")
+    .then("src/Controllers")
     .then("src/Routes")
-    .then("src/Web")
     .then("config/mysql_connect.js")
     .into(server)
 
