@@ -9,12 +9,20 @@ var EmployeSchema = new Schema({
     id: ObjectId,
     nome: String,
     cpf: String,
-    UA: String,
-    UE: String,
+    ua: String,
+    ue: String,
     telefone: String,
     email: String,
     cargo: String,
     setor: String,
+    created: {type: Date, default: Date.now},
+
+    equipamentos: [{
+        _id: ObjectId,
+        entrega: Date,
+        devolucao: Date,
+        anexos: {type: Array, "default": []}
+    }]
 })
 
 var Employe = mongoose.model('employe', EmployeSchema)

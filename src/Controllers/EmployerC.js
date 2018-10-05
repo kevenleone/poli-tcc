@@ -2,7 +2,6 @@ var Employe = require('../Models/Employes')
 
 module.exports.index = function(app, req, res){
     Employe.getAll().then((employer => {
-        console.log(employer)
         res.render('funcionario/index', {employer})
     })).catch(err => {
         res.send(err)
@@ -11,6 +10,16 @@ module.exports.index = function(app, req, res){
 
 module.exports.createPage = function(app, req, res){
     res.render('funcionario/register', {erros:''})
+}
+
+module.exports.showPage = function(app, req, res){
+    var id = req.params.id
+    Employe.getById(id).then(result => {
+        console.log(result)
+        res.render('funcionario/profile', {funcionario: result, erros: ''})
+    }).catch(err => {
+        res.send(err)
+    })
 }
 
 module.exports.create = function(app, req, res){
@@ -24,8 +33,11 @@ module.exports.create = function(app, req, res){
 }
 
 module.exports.delete = function(app, req, res){
-    Employe.delete().then(result => {
-        res.send(result)
+    var id = req.params.id
+
+    Employe.delete(id).then(result => {
+        console.log(result)
+        res.redirect('/funcionarios')
     }).catch(err => {
         res.send(err)
     })

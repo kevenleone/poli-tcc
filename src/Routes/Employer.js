@@ -13,4 +13,12 @@ module.exports = function(app){
         Employer.createPage(app, req, res)
     })
 
+    app.get('/funcionario/d/:id', (req, res) => {
+        Employer.delete(app, req, res)
+    })
+
+    app.get('/funcionario/:id', (req, res) => {
+        Employer.showPage(app, req, res)
+    })
+
 }

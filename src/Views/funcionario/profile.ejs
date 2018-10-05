@@ -1,695 +1,112 @@
 <% include ../template/topbar.ejs %>
-<style>
-    .table {
-        margin-top: 20px;
-    }
-</style>
-
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        hideAndShow = function (id) {
-            $('#div1').hide();
-            $('#div2').hide();
-            $('#div3').hide();
-            $('#div4').hide();
-            $(`#div${id}`).show();
+    <style>
+        .form-control-label {
+            font-weight: bold
         }
 
-        hideAndShow(1);
-    });
-</script>
+        label {
+            color:black
+        }
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Hospede</strong>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-body card-block">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#dados_hospede"
-                                        role="tab" aria-controls="home" aria-selected="true">Dados Hospede</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#dados_responsavel"
-                                        role="tab" aria-controls="profile" aria-selected="false">Dados do Responsável</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#caracteristica_hospede"
-                                        role="tab" aria-controls="contact" aria-selected="false">Característica Hospede</a>
-                                </li>
+        .required {
+            color: red;
+            font-weight: 900
+        }
 
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contrato" role="tab"
-                                        aria-controls="contrato" aria-selected="false">Contrato</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#saude" role="tab"
-                                        aria-controls="saude" aria-selected="false">Saúde</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content pl-3 p-1" id="myTabContent">
-                                <div class="tab-pane fade show active" id="dados_hospede" role="dados_hospede"
-                                    aria-labelledby="home-tab">
-
-                                    <div class="col-md-12">
-                                        <div class="col-md-6">
-                                            <table class="table table-striped">
-                                                <tr>
-                                                    <th width="20%">Nome Completo</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].nome%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">CPF</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].cpf%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Data de Nascimento</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].data_nascimento%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Religião</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].religiao%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Nacionalidade</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].nacionalidade%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Grau de Instrução</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].grau_de_instrucao%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Seguro Saúde</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].seguro_saude%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Pref. Hospital</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].preferencia_hospital%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Nome Pai</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].nome_pai%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Procedência</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].procedencia%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Motivo Residir ILPI</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].motivo_residir_ilpi%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Expectativas sobre acompanhamento</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].expectativa_acompanhamento_ilpi%>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <table class="table table-striped">
-                                                <tr>
-                                                    <th width="20%">Apelido</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].apelido%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">RG</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].rg%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">D/A</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].da%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Estado Civil</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].estado_civil%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Naturalidade</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].naturalidade%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Profissão</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].profissao%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Nº Seguro</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].n_seguro%>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <th width="20%">Contato</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].contato%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Nome Mãe</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].nome_mae%>
-                                                    </td>
-                                                </tr>
-
-                                            </table>
-                                        </div>
-                                    </div>
-
-
-
+    </style>
+  
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <% if(erros.length > 0){ %>
+                            <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                A campos obrigatórios que não foram preenchidos, verifique os erros abaixo.
+                                <div class="col-md-12">
+                                    <ul>
+                                        <% for(i=0; i<erros.length; i++){ %>
+                                            <li>
+                                                <%=erros[i].msg%>
+                                            </li>
+                                            <% } %>
+                                    </ul>
                                 </div>
-                                <div class="tab-pane fade" id="dados_responsavel" role="dados_responsavel"
-                                    aria-labelledby="profile-tab">
-                                    <div class="col-md-12">
-                                        <div class="col-md-6">
-                                            <table class="table table-striped">
-                                                <tr>
-                                                    <th width="20%">Nome Completo</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].nome_responsavel%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Profissão</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].profissao%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Endereço Residencial</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].endereco_residencial%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">RG</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].RG%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Há pessoas de referência impossibilitadas de
-                                                        realizar visitação:</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].pessoas_impossib_visitacao%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Nome:</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].nome_impossib_visitacao%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Motivo:</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].motivo_impossib%>
-                                                    </td>
-                                                </tr>
-
-                                            </table>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <table class="table table-striped">
-                                                <tr>
-                                                    <th width="20%">Data Nascimento</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].data_nascimento%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Parentesco</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].parentesco%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Endereço Comercial</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].endereco_comercial%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">CPF</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].CPF%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Tipo de Relação</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].tipo_relacao%>
-                                                    </td>
-                                                </tr>
-
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="caracteristica_hospede" role="caracteristica_hospede"
-                                    aria-labelledby="contact-tab">
-                                    <div class="col-md-12">
-                                        <div class="col-md-6">
-                                            <table class="table table-striped">
-                                                <tr>
-                                                    <th width="20%">Hobbies / Lazer</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].hobbies%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Preferência Alimentar</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].preferencia_alimnetar%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Plano ou desejo futuro</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].plano_desejofuturo%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Interesse em participar de</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].RG%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Relação do idoso com a família</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].relacao_idoso_familia%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Relação da família com o idoso</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].relacao_familia_idoso%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Possui médicos assistentes:</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].possui_medico_assistente%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Doenças: Anteriores e Atuais:</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].doencas_anteriores_e_atuais%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Vícios:</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].vicios%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Alergia Alimentar e Medicamentos</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].alergia_alimentar_medicamento%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Laúdos Médicos:</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].laudo_medico%>
-                                                    </td>
-                                                </tr>
-
-                                            </table>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <table class="table table-striped">
-                                                <tr>
-                                                    <th width="20%">Habilidade / Talento</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].habilidades_talentos%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Medos Relevantes</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].medos_traumas%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Hábitos Alimentares</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].habitos_alimentares%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Medicações que faz uso</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].medicacao_uso%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Fonte de renda</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].fonte_renda%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Idoso administra seus recursos financeiros</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].idoso_administra_recursos%>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th width="20%">Contato</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].contato%>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <th width="20%">Processo Judicial</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].processo_judicial%>
-                                                    </td>
-                                                </tr>
-
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="contrato" role="contrato" aria-labelledby="contact-tab">
-                                    <div class="col-md-12">
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <tr>
-                                                    <th width="20%">Valor Inicial</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].valor_inicial%>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <tr>
-                                                    <th width="20%">Tipo Acomodação</th>
-                                                    <td width="30%">
-                                                        <%=hospede[0].tipo_acomodacao%>
-                                                    </td>
-                                                </tr>
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="saude" role="saude" aria-labelledby="contact-tab">
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <p class="text-muted m-b-15"><code>Selecione o tipo de consulta
-                                                            médica</code></p>
-
-                                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
-                                                        aria-orientation="vertical">
-                                                        <div class="form-check">
-                                                            <div class="radio">
-                                                                <label for="radio1" class="form-check-label ">
-                                                                    <input checked onclick="hideAndShow(1)" type="radio"
-                                                                        id="radio1" name="radios" class="form-check-input">Prescrição
-                                                                    Médica
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label class="form-check-label ">
-                                                                    <input onclick="hideAndShow(2)" type="radio" id="radio2"
-                                                                        name="radios" value="option2" class="form-check-input">Evolução
-                                                                    Enfermagem
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label for="radio3" class="form-check-label ">
-                                                                    <input onclick="hideAndShow(3)" type="radio" id="radio3"
-                                                                        name="radios" value="option3" class="form-check-input">Evolução
-                                                                    Médica
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label class="form-check-label ">
-                                                                    <input onclick="hideAndShow(4)" type="radio" id="radio3"
-                                                                        name="radios" class="form-check-input">Prontuário
-                                                                    Nutricional
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div id="div1">
-                                                <button 
-                                                data-target="#addMed" data-toggle="modal" onClick="createMed()"
-                                                    class="btn pull-right btn-primary"><i class="fa fa-medkit"></i>
-                                                    Nova Prescrição Médica</button>
-
-                                                <table class="datatable table table-striped table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Medicamento</th>
-                                                            <th>Dose</th>
-                                                            <th>Data</th>
-                                                            <th>Intervalo</th>
-                                                            <th>Ações</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <%for(p=0;p<prescricao_hospede.length;p++){%>
-                                                        <tr>
-                                                            <td id="medicamento_<%=prescricao_hospede[p].id_prescricao%>">
-                                                                <%=prescricao_hospede[p].medicamento%>
-                                                            </td>
-                                                            <td id="dose_<%=prescricao_hospede[p].id_prescricao%>">
-                                                                <%=prescricao_hospede[p].dose%>
-                                                            </td>
-                                                            <td id="data_termino_<%=prescricao_hospede[p].id_prescricao%>">
-                                                                <%=prescricao_hospede[p].data_inicio%> -
-                                                                <%=prescricao_hospede[p].data_termino%>
-                                                            </td>
-                                                            <td id="horario_<%=prescricao_hospede[p].id_prescricao%>">
-                                                                <%=prescricao_hospede[p].horario_1%>/
-                                                                <%=prescricao_hospede[p].horario_2%>/
-                                                                <%=prescricao_hospede[p].horario_3%>/
-                                                                <%=prescricao_hospede[p].horario_4%>
-
-                                                            </td>
-                                                            <td>
-                                                                <button title="Atualizar Medicação" onClick="updateMed(this)"
-                                                                    value="<%=prescricao_hospede[p].id_prescricao%>/<%=prescricao_hospede[p].id_hospede%>"
-                                                                    data-toggle="modal" data-placement="top" class="getUserInfo btn btn-info"
-                                                                    data-target="#addMed"><i class="fa fa-medkit"></i></button>
-                                                                <a target="_blank" title="Gerar PDF" data-toggle="tooltip"
-                                                                    data-placement="top" class="btn btn-primary" href="">
-                                                                    <i class="fa fa-file-pdf-o"></i></a>
-                                                                <a title="Remover Medicação" onClick="return confirm('Tem certeza que deseja remover esta medicação?')"
-                                                                    data-toggle="tooltip" data-placement="top" class="btn btn-danger"
-                                                                    href="">
-                                                                    <i class="fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <% } %>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div id="div2">
-                                                <table class="datatable table table-striped table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Turno</th>
-                                                            <th>Temperatura Paciente</th>
-                                                            <th>Data</th>
-                                                            <th>Ações</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <% for(ev=0;ev<evolucoes_enfermagem.length;ev++){ %>
-                                                        <tr>
-                                                            <td>
-                                                                <%=evolucoes_enfermagem[ev].turno%>
-                                                            </td>
-                                                            <td>
-                                                                <%=evolucoes_enfermagem[ev].ssv_temperatura%>
-                                                            </td>
-                                                            <td>
-                                                                <%=evolucoes_enfermagem[ev].created%>
-                                                            </td>
-                                                            <td>
-                                                                <a title="Atualizar Evolução" data-toggle="tooltip"
-                                                                    data-placement="top" class="btn btn-success" href=""><i
-                                                                        class="fa fa-pencil"></i></a>
-                                                                <a target="_blank" title="Gerar PDF" data-toggle="tooltip"
-                                                                    data-placement="top" class="btn btn-primary" href="">
-                                                                    <i class="fa fa-file-pdf-o"></i></a>
-                                                                <a title="Remover Medicação" onClick="return confirm('Tem certeza que deseja remover esta evolução?')"
-                                                                    data-toggle="tooltip" data-placement="top" class="btn btn-danger"
-                                                                    href="">
-                                                                    <i class="fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <% } %>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div id="div3">
-                                                    <a
-                                                    href="/admin/evolucao_medica/<%=id%>" 
-                                                    class="btn pull-right btn-primary"><i class="fa fa-medkit"></i>
-                                                        Nova Evolução Médica</a>
-                                                <table class="datatable table table-striped table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Exames</th>
-                                                            <th>Intercorrencia</th>
-                                                            <th>Data</th>
-                                                            <th>Ações</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <% for(em=0; em < evolucoes_medicas.length;em++){%>
-                                                        <tr>
-                                                            <td>
-                                                                <%=evolucoes_medicas[em].exames_solicitados%>
-                                                            </td>
-                                                            <td>
-                                                                <%=evolucoes_medicas[em].intercorrencia%>
-                                                            </td>
-                                                            <td>
-                                                                <%=evolucoes_medicas[em].data%>
-                                                            </td>
-                                                            <td>
-                                                                <a href="../a/evolucao_medica/<%=evolucoes_medicas[em].id_evolucao_medica%>" title="Atualizar Evolução Médica"
-                                                                    data-toggle="tooltip" data-placement="top" class="btn btn-success"><i
-                                                                        class="fa fa-pencil"></i></a>
-                                                                <a target="_blank" title="Gerar PDF" data-toggle="tooltip"
-                                                                    data-placement="top" class="btn btn-primary" href="">
-                                                                    <i class="fa fa-file-pdf-o"></i></a>
-                                                                <a title="Remover Medicação" onClick="return confirm('Tem certeza que deseja remover esta evolução médica?')"
-                                                                    data-toggle="tooltip" data-placement="top" class="btn btn-danger"
-                                                                    href="">
-                                                                    <i class="fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <% } %>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div id="div4">  <a
-                                                href="/admin/prontuario_nutricional/<%=id%>" 
-                                                class="btn pull-right btn-primary"><i class="fa fa-medkit"></i>
-                                                    Nova Prontuário Nutricional</a>
-                                                <table class="datatable table table-striped table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Diagnóstico</th>
-                                                            <th>Data Evolução</th>
-                                                            <th>Ac Prioritário</th>
-                                                            <th>Recomendações</th>
-                                                            <th>Ações</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <%for(en=0;en < evolucoes_nutricional.length; en++){%>
-                                                        <tr>
-                                                            <td>
-                                                                <%=evolucoes_nutricional[en].diagnostico_prescricao_adc%>
-                                                            </td>
-                                                            <td>
-                                                                <%=evolucoes_nutricional[en].data_atendimento%>
-                                                            </td>
-                                                            <td>
-                                                                <%=evolucoes_nutricional[en].acompanhamento_prioritario%>
-                                                            </td>
-                                                            <td>
-                                                                <%=evolucoes_nutricional[en].recomendacao_nutricional%>
-                                                            </td>
-                                                            <td>
-                                                                <a title="Atualizar Prontuário Nutricional" data-toggle="tooltip"
-                                                                    data-placement="top" class="btn btn-success" href=""><i
-                                                                        class="fa fa-pencil"></i></a>
-                                                                <a target="_blank" title="Gerar PDF" data-toggle="tooltip"
-                                                                    data-placement="top" class="btn btn-primary" href="">
-                                                                    <i class="fa fa-file-pdf-o"></i></a>
-                                                                <a title="Remover Prontuário Nutricional" onClick="return confirm('Tem certeza que deseja remover este prontuário nutricional?')"
-                                                                    data-toggle="tooltip" data-placement="top" class="btn btn-danger"
-                                                                    href="">
-                                                                    <i class="fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <% } %>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- <div class="col-md-12">
-                                    <button class="pull-right btn btn-primary"><i class="fa fa-save"></i> Atualizar</button>
-                                </div> -->
-
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </div>
+                            <% } %>
+
+                                <div class="card-header"> Perfil do Funcionário</div>
+                                <div class="card-body">
+                                    <div class="card-body card-block">
+                                        <form class="form-horizontal" action="/funcionario/atualizar" method="post">
+                                          
+                        <div class="col-md-12">
+                                             
+                                     <div class="col-md-4">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Nome Completo<span class="required">*</span>
+                                              </label>
+                                                  <input disabled type="text" value='<%=funcionario.nome%>' name="nome" class="form-control">
+                                              </div>
+                                            </div> 
+                                            <div class="col-md-4">
+                                            <div class="form-group">
+                                            <label class="form-control-label">Cargo<span class="required">*</span>
+                                              </label>
+                                                 <input disabled type="text" value='<%=funcionario.cargo%>' class="form-control" id="data_nascimento_responsavel" name="cargo">        </div>
+                                              </div>
+                                  
+                                    <div class="col-md-4">
+                                         <div class="form-group">
+                                              <label class="form-control-label">Setor<span class="required">*</span>
+                                              </label>
+                                                  <input type="text" value='<%=funcionario.setor%>' name="setor" disabled class="form-control">
+                                              </div>
+                                            </div>
+                                          
+                                        <div class="col-md-4">
+                                          <div class="form-group">
+                                              <label class="form-control-label">UA<span class="required">*</span>
+                                              </label>
+                                                  <input type="text" value='<%=funcionario.ua%>' name="ua" disabled class="form-control">
+                                              </div> 
+                                            </div> 
+                                            <div class="col-md-4">
+                                            <div class="form-group">
+                                              <label class="form-control-label">UE</label>
+                                                  <input type="text" disabled value='<%=funcionario.ue%>' name="ue" class="form-control">
+                                              </div>
+                                              </div>
+                                            <div class="col-md-4">
+                                            <div class="form-group">
+                                              <label class="form-control-label">Email: <span class="required">*</span></label>
+                                                  <input value='<%=funcionario.email%>'type="email" name="email" disabled class="form-control">
+                                                  
+                                                </div>  </div> 
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                      <label class="form-control-label">Telefone :<span class="required">*</span></label>
+                                                          <input type="text" value='<%=funcionario.telefone%>' name="telefone" disabled class="form-control">
+                                                        </div>  </div>
+
+                                              <div class="col-md-4">
+                                                    <div class="form-group">
+                                                <label class="form-control-label">CPF :<span class="required">*</span>
+                                              </label>
+                                          <input type="text" value='<%=funcionario.cpf%>' data-msn_validacao="Preencha o cpf corretamente." name="cpf" disabled class="cpf form-control validar-cpf">
+                                              </div>
+                                              </div>
+                                
+                                            <div class="col-md-12">
+                                                <br>
+                                                <a class="pull-left btn btn-danger" href="/funcionarios">Voltar</a>
+                                                
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <% include ../template/footer.ejs  %>
+                    <% include ../template/footer.ejs  %>

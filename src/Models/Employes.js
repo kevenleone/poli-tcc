@@ -28,6 +28,13 @@ module.exports = new class EmployeModel {
             email: employe.email,
             cargo: employe.cargo,
             setor: employe.setor,
+            created: employe.created,
+
+            equipamentos: [{
+                entrega: employe.entrega,
+                devolucao: employe.devolucao,
+                anexos: employe.anexos
+            }]
         }
 
         return Employe.findByIdAndUpdate(id, updatedEmploye, { new: true });
@@ -35,6 +42,6 @@ module.exports = new class EmployeModel {
 
     delete(id) {
         client.decrby('count_employer', 1)
-        return Employe.findByIdAndRemove(id);
+        return Employe.findOneAndDelete({_id: id})
     }
 }

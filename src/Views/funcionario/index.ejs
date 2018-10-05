@@ -33,8 +33,8 @@
                         <td> <%=employer[i].cargo%> </td>
                         <td> <%=employer[i].setor%> </td>
                         <td> <%=employer[i].telefone%> </td>
-                        <td> <a title="Visualizar" href="employer/<%=employer[i].id_employer%>" class="btn btn-outline-primary" href="#"><i class="fa fa-eye"></i></a>
-                        <a onclick="return confirm('Tem certeza que deseja remover esta employer?')" href="employer/d/<%=employer[i].id_employer%>" title="Remover" class="btn btn-outline-danger" ><i class="fa fa-trash"></i></button></td>
+                        <td> <a title="Visualizar" href="funcionario/<%=employer[i]._id%>" class="btn btn-outline-primary" href="#"><i class="fa fa-eye"></i></a>
+                        <a onclick="return confirm('Tem certeza que deseja remover esta employer?')" href="funcionario/d/<%=employer[i]._id%>" title="Remover" class="btn btn-outline-danger" ><i class="fa fa-trash"></i></button></td>
                       </tr>
 
                       <% } %>
