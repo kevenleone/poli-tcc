@@ -1,0 +1,153 @@
+<% include ../template/topbar.ejs %>
+  
+    <script>
+        $( document ).ready(function() {
+
+            escondeTodosMenos = function(toShow, show){
+                $('#imei').hide();
+                $('#servicetag').hide();
+                $('#mac').hide();
+                $("select option:contains('Iphone')").attr("disabled","disabled")
+                $("select option:contains('CISCO')").attr("disabled","disabled")
+                $("select option:contains('DELL')").attr("disabled","disabled")
+
+                if(toShow !== null){
+                    $(toShow).show();
+                    $(`select option:contains('${show}')`).attr("disabled",false)
+                }
+            }
+
+
+            exibeCampos = function(campo){
+                switch(campo){
+                    case 0: 
+                        escondeTodosMenos('#imei', 'Iphone');
+                        break;
+
+                    case 1: 
+                        escondeTodosMenos('#servicetag', 'DELL');
+                        break;
+                    
+                    case 2: 
+                        escondeTodosMenos('#mac', 'CISCO');
+                        break;
+                }
+
+            }
+
+    escondeTodosMenos(null);
+
+        });
+    </script>
+  
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <% if(erros.length > 0){ %>
+                            <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                A campos obrigatórios que não foram preenchidos, verifique os erros abaixo.
+                                <div class="col-md-12">
+                                    <ul>
+                                        <% for(i=0; i<erros.length; i++){ %>
+                                            <li>
+                                                <%=erros[i].msg%>
+                                            </li>
+                                            <% } %>
+                                    </ul>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <% } %>
+
+                                <div class="card-header"> Cadastro de Equipamento</div>
+                                <div class="card-body">
+                                    <div class="card-body card-block">
+                                        <form class="form-horizontal" action="/equipamento/cadastrar" method="post">
+                                          
+                        <div class="col-md-12">
+                        
+                            <div class="col-md-12">
+                            <b>Selecione o tipo de equipamento:</b>  
+                            <input onClick="exibeCampos(0)" required name="tipo" id="tipo" type="radio"> Celular
+                            <input onClick="exibeCampos(1)" required name="tipo" id="tipo" type="radio"> Computador
+                            <input onClick="exibeCampos(2)" required name="tipo" id="tipo" type="radio"> VOIP<br><br>
+                            </div>
+
+
+                            <div id="imei"class="col-md-4">
+                                    <div class="form-group">
+                                         <label class="form-control-label">IMEI<span class="required">*</span>
+                                         </label>
+                                             <input type="text" name="imei" required class="form-control">
+                                         </div>
+                               </div>
+
+                               <div id="servicetag" class="col-md-4">
+                                   <div class="form-group">
+                                        <label class="form-control-label">SERVICE TAG<span class="required">*</span>
+                                        </label>
+                                            <input type="text" name="servicetag" required class="form-control">
+                                        </div>
+                              </div>
+
+                              <div id="mac" class="col-md-4">
+                               <div class="form-group">
+                                    <label class="form-control-label">MAC<span class="required">*</span>
+                                    </label>
+                                        <input  type="text" name="mac" required class="form-control">
+                                    </div>
+                          </div>
+
+                                     <div class="col-md-4">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Modelo Equipamento<span class="required">*</span>
+                                              </label>
+                                              <select class="form-control" data-placeholder="Your Favorite Football Team"  tabindex="5">
+                                                    <option value=""></option>
+                                                    <optgroup label="APARELHOS MÓVEIS">
+                                                      <option id="aparelho">Iphone 5S</option>
+                                                      <option id="aparelho">Iphone SE</option>
+                                                      <option id="aparelho">Iphone 6</option>
+                                                      <option id="aparelho">Iphone 6 Plus</option>
+                                                    </optgroup>
+                                                    <optgroup label="MÁQUINAS">
+                                                      <option id="maquina">DELL Optiplex 6100</option>
+                                                      <option id="maquina">DELL Latitude 3000</option>
+                                                      <option id="maquina">DELL G40-80</option>
+                                                      <option id="maquina">DELL Vostro 30</option>
+                                                    </optgroup>
+                                                    <optgroup label="VOIPS">
+                                                      <option id="voip">CISCO 3000</option>
+                                                      <option id="voip">CISCO 3012</option>
+                                                      <option id="voip">CISCO 4012</option>
+                                                      <option id="voip">CISCO 5000</option>
+                                                    </optgroup>
+                                                  </select>
+                                              </div>
+                                            </div> 
+                                          
+                                  
+                                          
+                                        <div class="col-md-4">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Observação<span class="required">*</span>
+                                              </label>
+                                                  <input type="text" name="observacao" required class="form-control">
+                                              </div> 
+                                            </div> 
+                                          
+                                            <div class="col-md-12">
+                                                <br>
+                                                <a class="pull-left btn btn-danger" href="">Voltar</a>
+                                                <button class="pull-right btn btn-primary">
+                                                    <i class="fa fa-save"></i> Cadastrar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                    </div>
+                    <% include ../template/footer.ejs  %>

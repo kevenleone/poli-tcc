@@ -3,8 +3,8 @@ var Schema = mongoose.Schema
 var ObjectId = Schema.ObjectId
 
 var ITDeviceSchema = new Schema({
-    _id: ObjectId,
-    employer_id: ObjectId,
+    id: ObjectId,
+    cpf: {type: String, default: null},
     imei: Number,
     servicetag: String,
     mac: String,

@@ -1,26 +1,27 @@
 var redis = require('redis')
 var client = redis.createClient()
 var mongoose = require('mongoose')
-var ITDevice = require('../Schemas/IT_Devices')
+var IT_Device = require('../Schemas/IT_Devices')
+
 
 module.exports = new class ITDeviceModel {
     getAll() {
-        return ITDevice.find();
+        return IT_Device.find();
     }
 
     getById(id) {
-        return ITDevice.findById(id);
+        return IT_Device.findById(id);
     }
 
     create(ITDevice) {
         client.incrby('count_ITDevicer', 1)
-        return ITDevice.create(ITDevice);
+        return IT_Device.create(ITDevice);
     }
 
     update(id, device) {
 
         const updatedITDevice = {
-            employer_id: device.employer_id,
+            cpf: device.cpf,
             imei: device.imei,
             servicetag: device.servicetag, 
             mac: device.mac, 
@@ -32,11 +33,11 @@ module.exports = new class ITDeviceModel {
             ativo: device.ativo
         }
 
-        return ITDevice.findByIdAndUpdate(id, updatedITDevice, { new: true });
+        return IT_Device.findByIdAndUpdate(id, updatedITDevice, { new: true });
     }
 
     delete(id) {
         client.decrby('count_ITDevicer', 1)
-        return ITDevice.findOneAndDelete({_id: id})
+        return IT_Device.findOneAndDelete({_id: id})
     }
 }

@@ -9,14 +9,14 @@ module.exports.index = function(app, req, res){
 }
 
 module.exports.createPage = function(app, req, res){
-    res.render('funcionario/register', {erros:''})
+    res.render('funcionario/cadastro', {erros:''})
 }
 
 module.exports.showPage = function(app, req, res){
     var id = req.params.id
     Employe.getById(id).then(result => {
         console.log(result)
-        res.render('funcionario/profile', {funcionario: result, erros: ''})
+        res.render('funcionario/perfil', {funcionario: result, erros: ''})
     }).catch(err => {
         res.send(err)
     })
