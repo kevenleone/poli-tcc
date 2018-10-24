@@ -13,8 +13,7 @@ module.exports = new class EmployeModel {
     }
 
     create(employe) {
-        client.incrby('count_employer', 1)
-        return Employe.create(employe);
+        return Employe.create(employe).then(work => client.incrby('count_employer', 1)).catch(err => console.log(err));
     }
 
     update(id, employe) {

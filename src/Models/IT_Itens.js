@@ -1,7 +1,6 @@
 var redis = require('redis')
 var client = redis.createClient()
 
-
 module.exports.setComputerRedisCount = function(){
     var num = Math.random() * (100000 / 2) - 1
     num = num.toFixed(0)
