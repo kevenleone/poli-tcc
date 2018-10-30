@@ -4,12 +4,14 @@ const ITController = require('../Controllers/IT_DevicesC')
 const moment = require('moment')
 const faker = require('faker')
 const colors = require('colors')
+const Helper = require('./Helper')
 const {
     performance
 } = require('perf_hooks')
 
-class Job {
+class Job extends Helper {
     constructor() {
+        super();
         this.faker = require('faker')
 
         this.insertData = () => new Promise((resolve, reject) => {
@@ -19,36 +21,6 @@ class Job {
                 reject(err);
             })
         });
-
-        this.device = {
-            imei: undefined,
-            servicetag: undefined,
-            mac: undefined,
-            modelo: undefined,
-            chips: undefined,
-            tipo_equipamento: undefined,
-            chip_ativado: undefined,
-            numero_chip: undefined,
-            entrega: this.faker.date.recent(),
-            devolucao: this.faker.date.future(),
-        }
-    }
-
-    deviceDefault(){
-        let device = {
-            imei: undefined,
-            servicetag: undefined,
-            mac: undefined,
-            modelo: undefined,
-            chips: undefined,
-            tipo_equipamento: undefined,
-            chip_ativado: undefined,
-            numero_chip: undefined,
-            entrega: this.faker.date.recent(),
-            devolucao: this.faker.date.future(),
-        }
-
-        this.device = device
     }
 
     now() {
@@ -59,7 +31,7 @@ class Job {
     }
 
     locales() {
-        var locales = ['pt_BR', 'en', 'fr', 'es', 'it']
+        let locales = ['pt_BR', 'en', 'fr', 'es', 'it']
         return locales[this.faker.random.number({
             min: 0,
             max: 4
@@ -67,23 +39,69 @@ class Job {
     }
 
     generateAleatoryDevice(){
-        let num = this.faker.random.number({min: 0, max: 1})
+        let bool = this.faker.random.boolean()
+        let device = {
+            imei: undefined,
+            servicetag: undefined,
+            mac: undefined,
+            modelo: undefined,
+            chips: undefined,
+            tipo_ativo: undefined,
+            chip_ativado: undefined,
+            numero: undefined,
+            serial_number: undefined,
+            serial_key: undefined,
+            software: undefined,
+            expira: undefined,
+            entrega: this.faker.date.recent(),
+            devolucao: undefined,
+            anexos: this.generateFileRandom('file', 3),
+            em_uso: this.faker.random.boolean()
+        }
+
+        if(bool == true){
+            device.devolucao = this.faker.date.future()
+            device.em_uso = false
+        }
+
+        let num = this.faker.random.number({min: 0, max: 3})
+
         switch(num){
             case 0: 
-                this.device.imei = this.faker.random.number({min: 10000000000, max:90000000000})
-                this.device.modelo = 'Iphone 5S'
-                this.device.chips = this.faker.random.number({min:0, max: 2})
-                this.device.tipo_equipamento = 'Celular'
-                this.device.chip_ativado = this.faker.random.boolean()
-                this.device.numero_chip = this.faker.phone.phoneNumber('(##) 9#### ####')
+                device.imei = this.faker.random.number({min: 10000000000, max:90000000000})
+                device.modelo = this.getModeloAleatorio('aparelho')
+                device.chips = this.faker.random.number({min:0, max: 2})
+                device.tipo_ativo = 'Celular'
+                device.chip_ativado = this.faker.random.boolean()
+                device.numero_chip = this.faker.phone.phoneNumber('(##) 9####-####')
                 break;
             case 1:
-                this.device.servicetag = this.faker.random.uuid().split('-')[0].toUpperCase()
-                this.device.modelo = "X510U"
-                this.device.tipo_equipamento = "Computador"
+                device.servicetag = this.faker.random.uuid().split('-')[0].toUpperCase()
+                device.modelo = this.getModeloAleatorio('computador')
+                device.tipo_ativo = "Notebook"
+                break;
+            case 2:
+                device.mac = this.faker.internet.mac().toUpperCase()
+                device.modelo = this.getModeloAleatorio('voip')
+                device.tipo_ativo = 'VOIP'
+                device.numero = this.faker.phone.phoneNumber('(##) ####-####')
+                break;
+            case 3:
+                device.software = this.getModeloAleatorio('software').toUpperCase();
+                device.serial_key = this.faker.random.uuid().toUpperCase()
+                device.expira = bool
                 break;
         }
-        return this.device
+       
+        return device
+    }
+
+    generateFileRandom(type, max = 2){
+        let arr = []
+        for(let i = 0; i < this.faker.random.number({min: 1, max: max}); i++){
+            arr.push(this.faker.system.commonFileName('jpeg'))
+        }
+        return arr
     }
 
     generateFake() {
@@ -97,7 +115,7 @@ class Job {
             cpf: this.faker.random.number({min: 10000000000, max: 999999999990}),
             UA: this.faker.random.number({min: 10000000,max: 99999999}),
             UE: this.faker.random.number({min: 1000,max: 9999}),
-            telefone: this.faker.phone.phoneNumber('(##) 9#### ####'),
+            telefone: this.faker.phone.phoneNumber('(##) 9####-####'),
             email: this.faker.internet.email(firstName, lastName),
             cargo: this.faker.commerce.department(),
             setor: this.faker.commerce.department(),
@@ -110,10 +128,8 @@ class Job {
                 numero: this.faker.random.number({min: 1,max: 10000}),
                 cep: this.faker.address.zipCode('#####-###')
             },
-
-            equipamentos: this.generateAleatoryDevice()
+            ativos_tecnologicos: [this.generateAleatoryDevice(), this.generateAleatoryDevice(), this.generateAleatoryDevice()]
         }
-        this.deviceDefault()
     }
 
     calculateDate(initial, final) {
@@ -122,10 +138,10 @@ class Job {
     }
 
     async insert(y = 100) {
-        var timeStart = performance.now();
+        let timeStart = performance.now();
         console.log(`Starting time: ${this.now()}`)
         for (let i = 0; i < y; i++) {
-            const result = await this.insertData()
+            let result = await this.insertData()
         }
         console.log(`End time: ${this.now()}`)
         let timeEnd = performance.now();
