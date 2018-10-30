@@ -56,7 +56,7 @@ class Job extends Helper {
             entrega: this.faker.date.recent(),
             devolucao: undefined,
             anexos: this.generateFileRandom('file', 3),
-            em_uso: this.faker.random.boolean()
+            em_uso: this.faker.random.boogitlean()
         }
 
         if(bool == true){
