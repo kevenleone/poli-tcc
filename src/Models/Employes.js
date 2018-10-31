@@ -5,7 +5,7 @@ var Employe = require('../Schemas/Employes')
 
 module.exports = new class EmployeModel {
     getAll() {
-        return Employe.find();
+        return Employe.find().limit(500);
     }
 
     getById(id) {

@@ -55,8 +55,8 @@ class Job extends Helper {
             expira: undefined,
             entrega: this.faker.date.recent(),
             devolucao: undefined,
-            anexos: this.generateFileRandom('file', 3),
-            em_uso: this.faker.random.boogitlean()
+            anexos: this.generateRandomArr('file', 3),
+            em_uso: this.faker.random.boolean()
         }
 
         if(bool == true){
@@ -73,7 +73,7 @@ class Job extends Helper {
                 device.chips = this.faker.random.number({min:0, max: 2})
                 device.tipo_ativo = 'Celular'
                 device.chip_ativado = this.faker.random.boolean()
-                device.numero_chip = this.faker.phone.phoneNumber('(##) 9####-####')
+                device.numero = this.faker.phone.phoneNumber('(##) 9####-####')
                 break;
             case 1:
                 device.servicetag = this.faker.random.uuid().split('-')[0].toUpperCase()
@@ -89,21 +89,58 @@ class Job extends Helper {
             case 3:
                 device.software = this.getModeloAleatorio('software').toUpperCase();
                 device.serial_key = this.faker.random.uuid().toUpperCase()
+                device.tipo_ativo = "Software"
                 device.expira = bool
                 break;
         }
        
         return device
     }
+    
 
-    generateFileRandom(type, max = 2){
+    generateRandomArr(type, max = this.faker.random.number({min:1, max: 5})){
         let arr = []
-        for(let i = 0; i < this.faker.random.number({min: 1, max: max}); i++){
-            arr.push(this.faker.system.commonFileName('jpeg'))
+        if(type == 'address'){
+            max = 2
         }
+        let it = this.faker.random.number({min: 1, max: max})
+
+        switch(type){
+            case 'file':
+                for(let i = 0; i < it; i++){
+                    arr.push(this.faker.system.commonFileName('jpeg'))
+                }
+                break;
+            case 'device':
+                for(let i = 0; i < it; i++){
+                    arr.push(this.generateAleatoryDevice())
+                }
+                break;
+            case 'address':
+                let atual = true 
+                for(let i = 0; i < it; i++){
+
+                    if(i > 0){
+                        atual = false
+                    }
+
+                    let add = {
+                        cidade: this.faker.address.city(),
+                        pais: this.faker.address.country(),
+                        bairro: this.faker.address.streetAddress(),
+                        estado: this.faker.address.state(),
+                        rua: this.faker.address.streetName(),
+                        numero: this.faker.random.number({min: 1,max: 10000}),
+                        cep: this.faker.address.zipCode('#####-###'),
+                        atual: atual
+                    }
+                    arr.push(add)
+                }
+                break;
+            }
         return arr
     }
-
+  
     generateFake() {
         let firstName = this.faker.name.firstName()
         let lastName = this.faker.name.lastName()
@@ -113,22 +150,15 @@ class Job extends Helper {
         return {
             nome: `${firstName} ${lastName}`,
             cpf: this.faker.random.number({min: 10000000000, max: 999999999990}),
-            UA: this.faker.random.number({min: 10000000,max: 99999999}),
-            UE: this.faker.random.number({min: 1000,max: 9999}),
+            ua: this.faker.random.number({min: 10000000,max: 99999999}),
+            ue: this.faker.random.number({min: 1000,max: 9999}),
             telefone: this.faker.phone.phoneNumber('(##) 9####-####'),
             email: this.faker.internet.email(firstName, lastName),
             cargo: this.faker.commerce.department(),
             setor: this.faker.commerce.department(),
 
-            endereco: {
-                cidade: this.faker.address.city(),
-                pais: this.faker.address.country(),
-                estado: this.faker.address.state(),
-                rua: this.faker.address.streetName(),
-                numero: this.faker.random.number({min: 1,max: 10000}),
-                cep: this.faker.address.zipCode('#####-###')
-            },
-            ativos_tecnologicos: [this.generateAleatoryDevice(), this.generateAleatoryDevice(), this.generateAleatoryDevice()]
+            endereco: this.generateRandomArr('address'),
+            ativos_tecnologicos: this.generateRandomArr('device')
         }
     }
 
@@ -137,7 +167,7 @@ class Job extends Helper {
         return `${(time / 1000).toFixed(2)} seconds`
     }
 
-    async insert(y = 100) {
+    async insert(y = 500) {
         let timeStart = performance.now();
         console.log(`Starting time: ${this.now()}`)
         for (let i = 0; i < y; i++) {

@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "prod": "pm2 start server.js --name API-TI"
+    "prod": "pm2 start server.js --name API-TI",
+    "job": "node src/Others/Job.js"
   },
   "repository": {
     "type": "git",

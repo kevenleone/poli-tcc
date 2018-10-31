@@ -18,23 +18,29 @@ var EmployeSchema = new Schema({
         cidade: String,
         pais: String,
         estado: String,
+        bairro: String,
         rua: String,
         numero: Number,
-        cep: String
+        cep: String,
+        atual: Boolean
     }],
-    equipamentos: [{
-        _id: ObjectId,
+    ativos_tecnologicos: [{
         imei: Number,
         servicetag: String,
         mac: String,
         modelo: String,
-        chips: String,
-        tipo_equipamento: String,
+        chips: Number,
+        tipo_ativo: String,
         chip_ativado: Boolean,
-        numero_chip: String,
+        numero: String,
         entrega: Date,
         devolucao: Date,
-        anexos: {type: Array, "default": []}
+        em_uso: Boolean,
+        serial_number: Number,
+        serial_key: String,
+        software: String,
+        expira: Boolean,
+        anexos: []
     }],
     created: {type: Date, default: Date.now},
 

@@ -1,6 +1,6 @@
 <% include ../template/topbar.ejs %>
-    <style>
-        .form-control-label {
+<style>
+    .form-control-label {
             font-weight: bold
         }
 
@@ -14,99 +14,170 @@
         }
 
     </style>
-  
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <% if(erros.length > 0){ %>
-                            <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                                A campos obrigatórios que não foram preenchidos, verifique os erros abaixo.
-                                <div class="col-md-12">
-                                    <ul>
-                                        <% for(i=0; i<erros.length; i++){ %>
-                                            <li>
-                                                <%=erros[i].msg%>
-                                            </li>
-                                            <% } %>
-                                    </ul>
-                                </div>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <% } %>
 
-                                <div class="card-header"> Perfil do Funcionário</div>
-                                <div class="card-body">
-                                    <div class="card-body card-block">
-                                        <form class="form-horizontal" action="/funcionario/atualizar" method="post">
-                                          
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-7">
+                <div class="card">
+                    <% if(erros.length > 0){ %>
+                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        A campos obrigatórios que não foram preenchidos, verifique os erros abaixo.
                         <div class="col-md-12">
-                                             
-                                     <div class="col-md-4">
-                                          <div class="form-group">
-                                              <label class="form-control-label">Nome Completo<span class="required">*</span>
-                                              </label>
-                                                  <input disabled type="text" value='<%=funcionario.nome%>' name="nome" class="form-control">
-                                              </div>
-                                            </div> 
-                                            <div class="col-md-4">
-                                            <div class="form-group">
-                                            <label class="form-control-label">Cargo<span class="required">*</span>
-                                              </label>
-                                                 <input disabled type="text" value='<%=funcionario.cargo%>' class="form-control" id="data_nascimento_responsavel" name="cargo">        </div>
-                                              </div>
-                                  
-                                    <div class="col-md-4">
-                                         <div class="form-group">
-                                              <label class="form-control-label">Setor<span class="required">*</span>
-                                              </label>
-                                                  <input type="text" value='<%=funcionario.setor%>' name="setor" disabled class="form-control">
-                                              </div>
-                                            </div>
-                                          
-                                        <div class="col-md-4">
-                                          <div class="form-group">
-                                              <label class="form-control-label">UA<span class="required">*</span>
-                                              </label>
-                                                  <input type="text" value='<%=funcionario.ua%>' name="ua" disabled class="form-control">
-                                              </div> 
-                                            </div> 
-                                            <div class="col-md-4">
-                                            <div class="form-group">
-                                              <label class="form-control-label">UE</label>
-                                                  <input type="text" disabled value='<%=funcionario.ue%>' name="ue" class="form-control">
-                                              </div>
-                                              </div>
-                                            <div class="col-md-4">
-                                            <div class="form-group">
-                                              <label class="form-control-label">Email: <span class="required">*</span></label>
-                                                  <input value='<%=funcionario.email%>'type="email" name="email" disabled class="form-control">
-                                                  
-                                                </div>  </div> 
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                      <label class="form-control-label">Telefone :<span class="required">*</span></label>
-                                                          <input type="text" value='<%=funcionario.telefone%>' name="telefone" disabled class="form-control">
-                                                        </div>  </div>
-
-                                              <div class="col-md-4">
-                                                    <div class="form-group">
-                                                <label class="form-control-label">CPF :<span class="required">*</span>
-                                              </label>
-                                          <input type="text" value='<%=funcionario.cpf%>' data-msn_validacao="Preencha o cpf corretamente." name="cpf" disabled class="cpf form-control validar-cpf">
-                                              </div>
-                                              </div>
-                                
-                                            <div class="col-md-12">
-                                                <br>
-                                                <a class="pull-left btn btn-danger" href="/funcionarios">Voltar</a>
-                                                
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                            <ul>
+                                <% for(i=0; i<erros.length; i++){ %>
+                                <li>
+                                    <%=erros[i].msg%>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <% include ../template/footer.ejs  %>
+                    <% } %>
+
+                    <div class="card-header"> Perfil do Funcionário</div>
+                    <div class="card-body">
+                        <div class="card-body card-block">
+                            <form class="form-horizontal" action="/funcionario/atualizar" method="post">
+
+                                <div class="col-md-12">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Nome Completo<span class="required">*</span>
+                                            </label>
+                                            <input disabled type="text" value='<%=funcionario.nome%>' name="nome" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Cargo<span class="required">*</span>
+                                            </label>
+                                            <input disabled type="text" value='<%=funcionario.cargo%>' class="form-control"
+                                                id="data_nascimento_responsavel" name="cargo"> </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Setor<span class="required">*</span>
+                                            </label>
+                                            <input type="text" value='<%=funcionario.setor%>' name="setor" disabled
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">UA<span class="required">*</span>
+                                            </label>
+                                            <input type="text" value='<%=funcionario.ua%>' name="ua" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">UE</label>
+                                            <input type="text" disabled value='<%=funcionario.ue%>' name="ue" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Email: <span class="required">*</span></label>
+                                            <input value='<%=funcionario.email%>' type="email" name="email" disabled
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Telefone :<span class="required">*</span></label>
+                                            <input type="text" value='<%=funcionario.telefone%>' name="telefone"
+                                                disabled class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">CPF :<span class="required">*</span>
+                                            </label>
+                                            <input type="text" value='<%=funcionario.cpf%>' data-msn_validacao="Preencha o cpf corretamente."
+                                                name="cpf" disabled class="cpf form-control validar-cpf">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <br>
+                                    </div>
+                                    <div class="row col-md-12">
+                                    <%for(var a = 0; a < funcionario.endereco.length; a++){%>
+
+                                    <div class="col-md-4">
+                                        <address>
+                                            <b>País:</b> <%=funcionario.endereco[a].pais%> <br>
+                                            <b>Cidade:</b> <%=funcionario.endereco[a].cidade%><br>
+                                            <b>Estado:</b> <%=funcionario.endereco[a].estado%><br>
+                                            <b>Bairro:</b> <%=funcionario.endereco[a].bairro%><br>
+                                            <b>Rua:</b> <%=funcionario.endereco[a].rua%> <br>
+                                            <b>Número:</b> <%=funcionario.endereco[a].numero%> <br>
+                                            <b>Endereço atual:</b> 
+                                            <%if(a == 0){ %> 
+                                                <span class="badge badge-success">Sim</span> <% } else { %> <span class="badge badge-danger">Não</span> <% } %> 
+                                        </address>
+                                    </div>
+
+                                    <% } %>
+                                </div>
+
+                                    <div class="col-md-12">
+                                        <br>
+                                        <a class="pull-left btn btn-danger" href="/funcionarios">Voltar</a>
+
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">Ativos do Funcionário</div>
+                    <div class="card-body">
+                        <div class="card-body card-block">
+                                <%for(var i = 0; i < funcionario.ativos_tecnologicos.length; i++){%>
+                                    <div class="card">
+                                        <img class="card-img-top" width="200px" height="200px;" src="https://colorlib.com/polygon/sufee/images/admin.jpg"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title mb-3"><%=funcionario.ativos_tecnologicos[i].tipo_ativo%></h4>
+                                            <p class="card-text">
+                                               <%if(funcionario.ativos_tecnologicos[i].servicetag){%> <b>Service TAG:</b> <%=funcionario.ativos_tecnologicos[i].servicetag%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].imei){%> <b>IMEI:</b> <%=funcionario.ativos_tecnologicos[i].imei%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].mac){%> <b> MAC: </b> <%=funcionario.ativos_tecnologicos[i].mac%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].modelo){%> <b>Modelo:</b> <%=funcionario.ativos_tecnologicos[i].modelo%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].numero){%> <b>Número:</b> <%=funcionario.ativos_tecnologicos[i].numero%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].software){%> <b>Software:</b> <%=funcionario.ativos_tecnologicos[i].software%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].entrega){%> <b>Entrega:</b> <%=funcionario.ativos_tecnologicos[i].entrega%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].devolucao){%> <b>Devolução:</b> <%=funcionario.ativos_tecnologicos[i].devolucao%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].serial_key){%> <b>Serial_key:</b> <%=funcionario.ativos_tecnologicos[i].serial_key%> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].chip_ativado == true || funcionario.ativos_tecnologicos[i].chip_ativado == false){%> <b>Status CHIP:</b> 
+                                                    <%if(funcionario.ativos_tecnologicos[i].chip_ativado){%>
+                                                        <span class="badge badge-success">Ativado</span> <% } else { %>
+                                                        <span class="badge badge-danger">Desativado</span>
+                                                       <% } %> <br> <% } %> 
+                                               <%if(funcionario.ativos_tecnologicos[i].chips){%> <b>Chips:</b> <%=funcionario.ativos_tecnologicos[i].chips%> <br> <% } %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../template/footer.ejs  %>
