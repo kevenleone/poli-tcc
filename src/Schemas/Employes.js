@@ -14,6 +14,7 @@ var EmployeSchema = new Schema({
     email: String,
     cargo: String,
     setor: String,
+    ativo: Boolean,
     endereco: [{
         cidade: String,
         pais: String,
@@ -33,14 +34,17 @@ var EmployeSchema = new Schema({
         tipo_ativo: String,
         chip_ativado: Boolean,
         numero: String,
-        entrega: Date,
-        devolucao: Date,
+        entrega: String,
+        devolucao: String,
         em_uso: Boolean,
         serial_number: Number,
+        responsavel_entrega: String,
+        responsavel_devolucao: String,
         serial_key: String,
         software: String,
         expira: Boolean,
-        anexos: []
+        anexos: [],
+        acompanhamentos: []
     }],
     created: {type: Date, default: Date.now},
 

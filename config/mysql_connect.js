@@ -4,7 +4,7 @@ const connMysql = function (){
     var conn = mysql.createConnection({
         host: "localhost",
         user: "root",
-        password: "",
+        password: "avadakedavra",
         database: "ti-ativos",
         port: 3306
     })

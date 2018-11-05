@@ -1,8 +1,13 @@
 var Employe = require('../Models/Employes')
+const ENV = process.env
 
 module.exports.index = function(app, req, res){
     Employe.getAll().then((employer => {
-        res.render('funcionario/index', {employer})
+        if(ENV.ACCESS_TYPE === 'API_ONLY'){
+            res.send(employer)
+        } else {
+            res.render('funcionario/index', {employer})
+        }
     })).catch(err => {
         res.send(err)
     })
@@ -15,8 +20,11 @@ module.exports.createPage = function(app, req, res){
 module.exports.showPage = function(app, req, res){
     var id = req.params.id
     Employe.getById(id).then(result => {
-        console.log(result)
-        res.render('funcionario/perfil', {funcionario: result, erros: ''})
+        if(ENV.ACCESS_TYPE === 'API_ONLY'){
+            res.send(result)
+        } else {
+            res.render('funcionario/perfil', {funcionario: result, erros: ''})
+        }
     }).catch(err => {
         res.send(err)
     })

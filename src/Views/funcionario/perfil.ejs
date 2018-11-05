@@ -19,7 +19,6 @@
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-7">
                 <div class="card">
                     <% if(erros.length > 0){ %>
                     <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
@@ -107,28 +106,38 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <br>
+                                    <div class="col-md-12"> <br>
+                                        <center>
+                                            <h4>Endereços</h4>
+                                        </center> <br>
                                     </div>
-                                    <div class="row col-md-12">
-                                    <%for(var a = 0; a < funcionario.endereco.length; a++){%>
+                                    <div class="row col-md-12 jumbotron">
+                                        <%for(var a = 0; a < funcionario.endereco.length; a++){%>
 
-                                    <div class="col-md-4">
-                                        <address>
-                                            <b>País:</b> <%=funcionario.endereco[a].pais%> <br>
-                                            <b>Cidade:</b> <%=funcionario.endereco[a].cidade%><br>
-                                            <b>Estado:</b> <%=funcionario.endereco[a].estado%><br>
-                                            <b>Bairro:</b> <%=funcionario.endereco[a].bairro%><br>
-                                            <b>Rua:</b> <%=funcionario.endereco[a].rua%> <br>
-                                            <b>Número:</b> <%=funcionario.endereco[a].numero%> <br>
-                                            <b>Endereço atual:</b> 
-                                            <%if(a == 0){ %> 
-                                                <span class="badge badge-success">Sim</span> <% } else { %> <span class="badge badge-danger">Não</span> <% } %> 
-                                        </address>
+                                        <div class="col-md-4">
+                                            <address>
+                                                <b>País:</b>
+                                                <%=funcionario.endereco[a].pais%> <br>
+                                                <b>Cidade:</b>
+                                                <%=funcionario.endereco[a].cidade%><br>
+                                                <b>Estado:</b>
+                                                <%=funcionario.endereco[a].estado%><br>
+                                                <b>Bairro:</b>
+                                                <%=funcionario.endereco[a].bairro%><br>
+                                                <b>Rua:</b>
+                                                <%=funcionario.endereco[a].rua%> <br>
+                                                <b>Número:</b>
+                                                <%=funcionario.endereco[a].numero%> <br>
+                                                <b>Endereço atual:</b>
+                                                <%if(a == 0){ %>
+                                                <span class="badge badge-success">Sim</span>
+                                                <% } else { %> <span class="badge badge-danger">Não</span>
+                                                <% } %>
+                                            </address>
+                                        </div>
+
+                                        <% } %>
                                     </div>
-
-                                    <% } %>
-                                </div>
 
                                     <div class="col-md-12">
                                         <br>
@@ -140,43 +149,81 @@
                     </div>
                 </div>
             </div>
+        
         </div>
-        <div class="col-md-5">
+        <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Ativos do Funcionário</div>
                     <div class="card-body">
                         <div class="card-body card-block">
+                            <div class="col-md-12">
                                 <%for(var i = 0; i < funcionario.ativos_tecnologicos.length; i++){%>
+                                <div class="col-md-3">
                                     <div class="card">
-                                        <img class="card-img-top" width="200px" height="200px;" src="https://colorlib.com/polygon/sufee/images/admin.jpg"
+                                        <img class="card-img-top" width="10px" height="250px;" src="http://localhost:3000/image/<%=funcionario.ativos_tecnologicos[i].tipo_ativo%>.jpg"
                                             alt="Card image cap">
                                         <div class="card-body">
-                                            <h4 class="card-title mb-3"><%=funcionario.ativos_tecnologicos[i].tipo_ativo%></h4>
+                                            <h4 class="card-title mb-3">
+                                                <center><%=funcionario.ativos_tecnologicos[i].tipo_ativo%></center>
+                                            </h4>
                                             <p class="card-text">
-                                               <%if(funcionario.ativos_tecnologicos[i].servicetag){%> <b>Service TAG:</b> <%=funcionario.ativos_tecnologicos[i].servicetag%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].imei){%> <b>IMEI:</b> <%=funcionario.ativos_tecnologicos[i].imei%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].mac){%> <b> MAC: </b> <%=funcionario.ativos_tecnologicos[i].mac%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].modelo){%> <b>Modelo:</b> <%=funcionario.ativos_tecnologicos[i].modelo%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].numero){%> <b>Número:</b> <%=funcionario.ativos_tecnologicos[i].numero%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].software){%> <b>Software:</b> <%=funcionario.ativos_tecnologicos[i].software%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].entrega){%> <b>Entrega:</b> <%=funcionario.ativos_tecnologicos[i].entrega%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].devolucao){%> <b>Devolução:</b> <%=funcionario.ativos_tecnologicos[i].devolucao%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].serial_key){%> <b>Serial_key:</b> <%=funcionario.ativos_tecnologicos[i].serial_key%> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].chip_ativado == true || funcionario.ativos_tecnologicos[i].chip_ativado == false){%> <b>Status CHIP:</b> 
+                                                <%if(funcionario.ativos_tecnologicos[i].servicetag){%> <b>Service TAG:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].servicetag%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].imei){%> <b>IMEI:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].imei%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].mac){%> <b> MAC: </b>
+                                                <%=funcionario.ativos_tecnologicos[i].mac%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].modelo){%> <b>Modelo:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].modelo%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].numero){%> <b>Número:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].numero%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].software){%> <b>Software:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].software%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].entrega){%> <b>Entrega:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].entrega%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].devolucao){%> <b>Devolução:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].devolucao%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].responsavel_entrega){%> <b>Responsável Entrega:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].responsavel_entrega%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].responsavel_devolucao){%> <b>Responsável Devolução:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].responsavel_devolucao%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].serial_key){%> <b>Serial_key:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].serial_key%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].chip_ativado == true || funcionario.ativos_tecnologicos[i].chip_ativado == false){%>
+                                                    <b>Status CHIP:</b>
                                                     <%if(funcionario.ativos_tecnologicos[i].chip_ativado){%>
-                                                        <span class="badge badge-success">Ativado</span> <% } else { %>
-                                                        <span class="badge badge-danger">Desativado</span>
-                                                       <% } %> <br> <% } %> 
-                                               <%if(funcionario.ativos_tecnologicos[i].chips){%> <b>Chips:</b> <%=funcionario.ativos_tecnologicos[i].chips%> <br> <% } %>
+                                                    <span class="badge badge-success">Ativado</span>
+                                                    <% } else { %>
+                                                    <span class="badge badge-danger">Desativado</span>
+                                                    <% } %> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].chips){%> <b>Chips:</b>
+                                                <%=funcionario.ativos_tecnologicos[i].chips%> <br>
+                                                <% } %>
+                                                <%if(funcionario.ativos_tecnologicos[i].acompanhamentos.length > 0){%> <b>Acompanhamentos:</b>
+                                                <span class="badge badge-info"><%=funcionario.ativos_tecnologicos[i].acompanhamentos%> </span><br>
+                                                <% } %>
                                             </p>
                                         </div>
                                     </div>
+                                </div>
                                 <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 

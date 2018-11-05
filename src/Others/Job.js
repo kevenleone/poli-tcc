@@ -1,5 +1,4 @@
 const IT = require('../Models/IT_Devices')
-const Employes = require('../Models/Employes')
 const ITController = require('../Controllers/IT_DevicesC')
 const moment = require('moment')
 const faker = require('faker')
@@ -11,35 +10,28 @@ class Job extends Helper {
     constructor() {
         super();
         this.faker = require('faker')
-        this.insertData = () => new Promise((resolve, reject) => {
-            Employes.create(this.generateFakeEmploye()).then((data => {
-                resolve(data);
-            })).catch(err => {
-                reject(err);
-            })
-        });
         this.acompanhamentos = [ 'Fonte de Alimentação', 'Mochila', 'Teclado', 'Mouse', 'Fone de Ouvido', 'Película', 'Cartão de Memória', 'Nobreak' ]
+        this.banco = "MongoDB"
     }
 
     now() {
         let date = moment().format('DD/MM/YYYY - HH:mm:ss')
         let mili = moment().milliseconds()
 
-        return `${date}:${mili}`.blue
+        return `${date}:${mili}`.green
     }
-    
-    formatDate(date){
-        return moment(date).format("DD/MM/YYYY - HH:mm")
+
+    formatDate(date, format = "DD/MM/YYYY - HH:mm"){
+        return moment(date).format(format)
     }
 
     locales() {
         let locales = ['pt_BR', 'en', 'fr', 'es', 'it']
-        return locales[this.faker.random.number({min: 0, max: 4})]
+        return locales[this.faker.random.number({min:0, max:4})]
     }
 
-    generateAleatoryDevice(){
+    generateAleatoryDevice(num = this.faker.random.number({min:0, max:3})){
         let bool = this.faker.random.boolean()
-        let num = this.faker.random.number({min: 0, max: 3})
         let device = {
             imei: undefined,
             servicetag: undefined,
@@ -68,9 +60,9 @@ class Job extends Helper {
         }
         switch(num){
             case 0: 
-                device.imei = this.faker.random.number({min: 10000000000, max:90000000000})
+                device.imei = this.faker.random.number({min:10000000000, max:90000000000})
                 device.modelo = this.getModeloAleatorio('aparelho')
-                device.chips = this.faker.random.number({min:0, max: 2})
+                device.chips = this.faker.random.number({min:0, max:2})
                 device.tipo_ativo = 'Celular'
                 device.chip_ativado = this.faker.random.boolean()
                 device.numero = this.faker.phone.phoneNumber('(##) 9####-####')
@@ -98,13 +90,12 @@ class Job extends Helper {
         return device
     }
 
-    generateRandomArr(type, max = this.faker.random.number({min:1, max: 5})){
+    generateRandomArr(type, max = this.faker.random.number({min:1, max:5})){
         let arr = []
         if(type == 'address'){
             max = 2
         }
-        let it = this.faker.random.number({min: 1, max: max})
-
+        let it = this.faker.random.number({min:1, max})
         switch(type){
             case 'file':
                 for(let i = 0; i < it; i++){
@@ -119,18 +110,16 @@ class Job extends Helper {
             case 'address':
                 let atual = true 
                 for(let i = 0; i < it; i++){
-
                     if(i > 0){
                         atual = false
                     }
-
                     let add = {
                         cidade: this.faker.address.city(),
                         pais: this.faker.address.country(),
                         bairro: this.faker.address.streetAddress(),
                         estado: this.faker.address.state(),
                         rua: this.faker.address.streetName(),
-                        numero: this.faker.random.number({min: 1,max: 10000}),
+                        numero: this.faker.random.number({min:1,max:10000}),
                         cep: this.faker.address.zipCode('#####-###'),
                         atual: atual
                     }
@@ -147,11 +136,11 @@ class Job extends Helper {
         let locale = this.locales()
         this.faker.locale = locale
 
-        return {
+        let employe = {
             nome: `${firstName} ${lastName}`,
-            cpf: this.faker.random.number({min: 10000000000, max: 999999999990}),
-            ua: this.faker.random.number({min: 10000000,max: 99999999}),
-            ue: this.faker.random.number({min: 1000,max: 9999}),
+            cpf: this.faker.random.number({min:10000000000, max:999999999990}),
+            ua: this.faker.random.number({min:10000000,max:99999999}),
+            ue: this.faker.random.number({min:1000,max:9999}),
             telefone: this.faker.phone.phoneNumber('(##) 9####-####'),
             email: this.faker.internet.email(firstName, lastName),
             cargo: this.faker.commerce.department(),
@@ -159,15 +148,25 @@ class Job extends Helper {
             endereco: this.generateRandomArr('address'),
             ativos_tecnologicos: this.generateRandomArr('device')
         }
+
+        if(this.banco !== 'MongoDB'){
+            delete employe.ativos_tecnologicos
+            delete employe.endereco
+        }
+        
+
+        return employe
+
     }
 
     calculateDate(initial, final) {
         let time = final - initial
-        return `${(time / 1000).toFixed(2)} seconds`
+        time = (time / 1000).toFixed(2)
+        return time
     }
 
     generateArrParams(...params){
-        let random = this.faker.random.number({min: 1, max: 6})
+        let random = this.faker.random.number({min:1, max:6})
         let arr = [], arrFinal = []
         if(random > params.length){
             random = params.length
@@ -181,20 +180,36 @@ class Job extends Helper {
         return arrFinal
     }
 
-    async insert(y = 500) {
+    async insert(y = 50) {
         let timeStart = performance.now();
         console.log(`Starting time: ${this.now()}`)
-        for (let i = 0; i < y; i++) {
-            let result = await this.insertData()
+        console.log(`Running ${y} Inserts on ${this.banco}`.yellow)
+        if(this.banco == 'MongoDB'){
+            for (let i = 0; i < y; i++) {
+                let result = await this.insertData()
+            }
+        } else {
+            for (let i = 0; i < y; i++) {
+                let result = await this.insertOnMysql()
+            }
         }
-        console.log(`End time: ${this.now()}`)
-        let timeEnd = performance.now();
-        let timeSpent = `${this.calculateDate(timeStart, timeEnd)} & ${y} Inserts`.green
-        console.log(`Time Spent: ${timeSpent}`)
-        console.log('Closing Programm!'.red)
+        let timeSpent = this.calculateDate(timeStart, performance.now())
+        let data = {
+            banco: this.banco,
+            operacao: 'insert',
+            quantidade: y,
+            tempo: timeSpent
+        }
+        let metrics = await this.insertMetrics(data)
+        console.log(`End time: ${timeSpent}`)
+        console.log('Closing Programm!'.green)
         process.exit(1)
+        return data
     }
 }
 
-const newJob = new Job()
-newJob.insert()
+const newJob = new Job
+newJob.banco = 'MYSQL'
+newJob.insert(100)
+
+//module.exports = Job
