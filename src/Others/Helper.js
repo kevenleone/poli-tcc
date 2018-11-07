@@ -13,7 +13,7 @@ class Helper {
         this.connection = mysql.createConnection({
             host: "localhost",
             user: "root",
-            password: "avadakedavra",
+            password: "",
             database: "ti-ativos",
             port: 3306
         });
@@ -43,7 +43,7 @@ class Helper {
                 let funcionario_id = result_funcionario.insertId
                 let randomIt = this.faker.random.number({
                     min: 0,
-                    max: 1
+                    max: 2
                 })
                 for (let i = 0; i < randomIt; i++) {
                     let data = {

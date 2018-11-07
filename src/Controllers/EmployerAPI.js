@@ -3,9 +3,17 @@ const colors = require('colors')
 const Employe = require('../Models/Employes')
 const ENV = process.env
 const Controller = require('../Others/Controller')
+const {performance} = require('perf_hooks')
 class EmployerAPI extends Controller {
 
+    calculateDate(initial, final) {
+        let time = final - initial
+        time = (time / 1000).toFixed(2)
+        return time
+    }
+
     all(app, req, res, next) {
+        let init = performance.now()
         jwt.verify(req.token, ENV.SECRET_KEY, (err, token) => {
             if(err){
                 console.log(req.token)
@@ -14,6 +22,7 @@ class EmployerAPI extends Controller {
             }
             Employe.getAll().then((employer => {
                 this.sendSuccessResponse(req, res, next, employer)
+                console.log(this.calculateDate(init, performance.now()))
             })).catch(err => {
                 this.sendErrorResponse(req, res, next, err)
             })

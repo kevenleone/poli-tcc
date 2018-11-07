@@ -26,8 +26,8 @@ class Job extends Helper {
     }
 
     locales() {
-        let locales = ['pt_BR', 'en', 'fr', 'es', 'it']
-        return locales[this.faker.random.number({min:0, max:4})]
+        let locales = ['pt_BR', 'es', 'fr', 'en', 'it']
+        return locales[this.faker.random.number({min:0, max:2})]
     }
 
     generateAleatoryDevice(num = this.faker.random.number({min:0, max:3})){
@@ -201,7 +201,8 @@ class Job extends Helper {
             tempo: timeSpent
         }
         let metrics = await this.insertMetrics(data)
-        console.log(`End time: ${timeSpent}`)
+        console.log(`End time: ${this.now()}`)
+        console.log(`Time Spent: ${timeSpent}`)
         console.log('Closing Programm!'.green)
         process.exit(1)
         return data
@@ -209,7 +210,7 @@ class Job extends Helper {
 }
 
 const newJob = new Job
-newJob.banco = 'MYSQL'
-newJob.insert(100)
+//newJob.banco = 'MYSQL'
+newJob.insert(1000)
 
 //module.exports = Job

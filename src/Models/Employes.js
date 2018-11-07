@@ -8,7 +8,7 @@ class EmployeModel extends Controller {
         super()
     }
     getAll() {
-        return Employe.find().limit(500);
+        return Employe.find();
     }
 
     getById(id) {
