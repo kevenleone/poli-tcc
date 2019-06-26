@@ -210,7 +210,7 @@ class Job extends Helper {
 }
 
 const newJob = new Job
-//newJob.banco = 'MYSQL'
+newJob.banco = 'MYSQL'
 newJob.insert(1000)
 
 //module.exports = Job
