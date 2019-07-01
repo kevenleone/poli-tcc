@@ -13,22 +13,25 @@ Término | Nov-2018
 Defesa TCC | 31/05/2019
 Email Autor | kls@ecomp.poli.br | keven.santos.sz@gmail.com
 
-#### Modelo 1 - Modelagem Relacional Resumida
-<center> 
-<img alt='Modelo 1' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig8.png" width="500" height="250" /> </center>
+<p align="center"> 
+ Modelo 1 - Modelagem Relacional Resumida
+</p>
+<p align="center"> 
+<img alt='Modelo 1' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig8.png" width="500" height="250" /> </p>
 
+<p align="center"> 
+ Modelo 2 - Modelagem Não Relacional (MongoDB)
+</p>
+<p align="center"> 
+<img alt='Modelo 2' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig7.png" width="500" height="450" /> </p>
 
-#### Modelo 2 - Modelagem Não Relacional (MongoDB)
+<p align="center"> 
+Modelo 3 - Modelagem Chave-Valor (Redis)
+</p>
+<p align="center"> 
+<img alt='Modelo 3' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig9.png" width="500" height="250" /> </p>
 
-<center> 
-<img alt='Modelo 2' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig7.png" width="500" height="450" /> </center>
-
-#### Modelo 3 - Modelagem Chave-Valor (Redis)
-
-<center> 
-<img alt='Modelo 3' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig9.png" width="500" height="250" /> </center>
-
-Abaixo está descrito os resultados dos experimentos realizados com mais detalhes.
+### Abaixo está descrito os resultados dos experimentos realizados com mais detalhes.
 
 ##	Experimentos e Resultados
 <p align="justify">
@@ -41,9 +44,11 @@ Todos os testes foram efetuados 5 vezes para verificação das seguintes caracte
 <p align="justify">Os experimentos foram realizados em uma única máquina, de forma não distribuídas e cada teste pôde ser realizado utilizando uma massa de dados de quantidade variante, de acordo com o experimento. Cada experimento realizou um ou mais operações de CRUD, que estão descritas no título de cada figura e os experimentos foram realizados comparando o modelo poliglota com o relacional.
 A massa de dados pode variar de acordo com o teste e estará melhor descrita em seus respectivos testes. </p>
 
-<center> 
-<img alt='Experimento 1' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig1.png" width="500" height="250" /> </center>
-<center> 1. Experimento - Médias do tempo de execução para cada operação de CRUD - Teste unitário (1 Registro).  </center>
+<p align="center"> 
+<img alt='Experimento 1' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig1.png" width="500" height="250" /> </p>
+
+<p align="center"> 
+ 1. Experimento - Médias do tempo de execução para cada operação de CRUD - Teste unitário (1 Registro).  </p>
 
 Ambos os modelos apresentaram tempo de execução semelhantes e com resultados empatados em 2 testes cada.
 
@@ -89,9 +94,9 @@ As querys utilizadas no experimento 1:
     delete from ativos_tecnologicos where funcionario_id = 1
 ```
 
-<center> 
-<img alt='Experimento 2' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig2.png" width="500" height="250" /> </center>
-<center> 2.Experimento - Médias do tempo de execução para cada operação de CRUD – Massa com 100.000 Registros.</center>
+<p align="center"> 
+<img alt='Experimento 2' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig2.png" width="500" height="250" /> </p>
+<p align="center"> 2.Experimento - Médias do tempo de execução para cada operação de CRUD – Massa com 100.000 Registros.</p>
 
 <p>
 No experimento 2 a discrepância no tempo gasto para execução do teste foi maior. Com exceção da leitura, o SQL levou tempo maior em todas as operações realizadas. 
@@ -103,9 +108,9 @@ No cadastro, o tempo médio para inserção dos dados do SQL chegou até 3 vezes
 > As querys utilizadas no experimento 2 está presente nos experimentos 5 e 6.
 
 Devido a esta grande diferença, foram realizados os testes presentes nos experimentos 3 e 4. Nestes, foi medido o tempo gasto para o cadastro dos dados em diferentes quantitativos de registros, de 100 até 1 milhão, onde cada “K” representa mil registros e “KK” milhão de registros. O eixo X representa o número de registros processados e no Y o tempo gasto. </p>
-<center> 
-<img alt='Experimento 3' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig3.png" width="500" height="250" /> </center>
-<center> 3. Experimento - Médias do tempo de execução para cada operação de cadastro.</center>
+<p align="center"> 
+<img alt='Experimento 3' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig3.png" width="500" height="250" /> </p>
+<p align="center"> 3. Experimento - Médias do tempo de execução para cada operação de cadastro.</p>
 
 <p align='justify'>
 Durante a realização do teste do experimento 3 foi utilizado o modelo relacional proposto na modelo 1, o modelo poliglota obteve melhor tempo na execução do cadastro, comparado ao SQL, durante a realização do teste o modelo relacional chegou a durar o triplo do tempo para execução da mesma tarefa no modelo poliglota.
@@ -149,11 +154,11 @@ Durante a realização do teste do experimento 3 foi utilizado o modelo relacion
     delete from software where funcionario_id <= valor (considere valor entre 100 a 1000000)
     delete from ativos_tecnologicos where funcionario_id <= valor (considere valor entre 100 a 1000000)
 ```
-<center> 
-<img alt='Experimento 4' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig4.png" width="500" height="250" /> </center>
-<center>
+<p align="center"> 
+<img alt='Experimento 4' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig4.png" width="500" height="250" /> </p>
+<p align="center">
 4. Experimento - Médias do tempo de execução para cada operação de cadastro simples.
-</center>
+</p>
 
 <p align='justify'>
 O experimento 4 foi realizado com um cadastro simples, que utiliza apenas a tabela de funcionários como mostra a Figura 0 e, no poliglota desconsidera as listas e Arrays de ativos tecnológicos, endereço, acompanhamentos e anexos de ativos tecnológicos que foram utilizados no teste passado (experimento 3). 
@@ -166,15 +171,15 @@ O modelo poliglota apresentou melhor resultado levando menos tempo para execuç�
 
 Além do tempo, foi verificado o consumo de Memória RAM e de CPU dos bancos de dados durante a execução das operações de CRUD utilizando **100.000 registros**, como ilustrado nos experimentos 5 e 6.
 
-<center> 
-<img alt='Experimento 5' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig5.png" width="500" height="250" /> </center>
-<center> 5. Experimento - Recursos de Hardware (CPU).</center>
+<p align="center"> 
+<img alt='Experimento 5' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig5.png" width="500" height="250" /> </p>
+<p align="center"> 5. Experimento - Recursos de Hardware (CPU).</p>
 
 O consumo de CPU foi moderado e baixo durante os testes, destacando o maior consumo de CPU na operação de leitura e remoção de dados, o resultado do teste ficou empatado, cada modelo se destacou no menor consumo de CPU por 2 vezes cada.
 
-<center> 
-<img alt='Experimento 6' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig6.png" width="500" height="250" /> </center>
-<center> 6. Experimento - Recursos de Hardware (RAM).</center>
+<p align="center"> 
+<img alt='Experimento 6' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig6.png" width="500" height="250" /> </p>
+<p align="center"> 6. Experimento - Recursos de Hardware (RAM).</p>
 
 <p>
 
