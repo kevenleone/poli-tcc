@@ -2,9 +2,21 @@
 
 ### Projeto criado como estudo de caso para TCC do curso de Ciência de Dados e Analytics do curso de Pós Graduação da Escola Politécnica de Pernambuco ( Poli - UPE ) 
 
+Pergunta | Resposta | Detalhes
+------------ | ------------- | -------------
+Autor | Keven Leone dos Santos | ID: 0000-0003-1275-8719.
+Orientadora | Andrêza Leite de Alencar | ID: 0000-0001-7125-812X.
+Universidade | Escola Politécnica de Pernambuco (UPE)
+Curso | Especialização em Ciência de Dados e Analytics
+Início | Mar-2017
+Término | Nov-2018
+Defesa TCC | 31/05/2019
+Email Autor | kls@ecomp.poli.br | keven.santos.sz@gmail.com
+
 #### Modelo 1 - Modelagem Relacional Resumida
 <center> 
 <img alt='Modelo 1' src="https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig8.png" width="500" height="250" /> </center>
+
 
 #### Modelo 2 - Modelagem Não Relacional (MongoDB)
 
