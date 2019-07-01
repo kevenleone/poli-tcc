@@ -2,6 +2,23 @@
 
 ### Projeto criado como estudo de caso para TCC do curso de Ciência de Dados e Analytics do curso de Pós Graduação da Escola Politécnica de Pernambuco ( Poli - UPE ) 
 
+
+### Modelagem Relacional Resumida
+
+![Modelo Relacional](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig8.png)
+#### Modelo 1
+
+### Modelagem Não Relacional (MongoDB)
+
+![Modelo MongoDB](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig7.png)
+#### Modelo 2
+
+### Modelagem Chave-Valor (Redis)
+
+![Modelo Redis](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig9.png)
+
+#### Modelo 3
+
 Abaixo está descrito os resultados dos experimentos realizados com mais detalhes.
 
 ##	Experimentos e Resultados
@@ -16,7 +33,7 @@ Todos os testes foram efetuados 5 vezes para verificação das seguintes caracte
 A massa de dados pode variar de acordo com o teste e estará melhor descrita em seus respectivos testes. </p>
 
 ![Experimento 1](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig1.png)
-<center> Médias do tempo de execução para cada operação de CRUD - Teste unitário (1 Registro).  </center>
+<center> 1. Experimento - Médias do tempo de execução para cada operação de CRUD - Teste unitário (1 Registro).  </center>
 
 Ambos os modelos apresentaram tempo de execução semelhantes e com resultados empatados em 2 testes cada.
 
@@ -63,62 +80,24 @@ As querys utilizadas no experimento 1:
 ```
 
 ![Experimento 2](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig2.png)
-<center> Médias do tempo de execução para cada operação de CRUD – Massa com 100.000 Registros.</center>
+<center> 2.Experimento - Médias do tempo de execução para cada operação de CRUD – Massa com 100.000 Registros.</center>
 
 <p>
-No teste realizado da figura 2 a discrepância no tempo gasto para execução do teste foi maior. Com exceção da leitura, o SQL levou tempo maior em todas as operações realizadas. 
+No experimento 2 a discrepância no tempo gasto para execução do teste foi maior. Com exceção da leitura, o SQL levou tempo maior em todas as operações realizadas. 
 </p>
 
 <p align='justify'>
 No cadastro, o tempo médio para inserção dos dados do SQL chegou até 3 vezes mais tempo que o modelo Poliglota. 
 
-As querys utilizadas no experimento 2:
+> As querys utilizadas no experimento 2 está presente nos experimentos 5 e 6.
 
-*MongoDB*
-```
-    insert: db.sisati.funcionario.create({data}) 
-    find: db.sisati.funcionario.find().limit(100000)
-    update: db.sisati.funcionario.update({data})
-    delete: db.sisati.funcionario.deleteAll()
-```
-*SQL* 
-```
-    insert into funcionario (nome, senha, ua, telefone, email, cargo, setor, ativo) values (...)
-    insert into aparelho (imei, modelo, chip, chip_ativado, numero, funcionarios_id) values (...)
-    insert into computador (servicetag, modelo, tipo_ativo, funcionarios_id) values (...) 
-    insert into voip (mac, modelo, tipo_ativo, numero, funcionarios_id values(...)
-    insert into software (software, serial_key, expira) values (...)
-    insert into ativos_tecnologicos (entrega, devolucao, funcionarios_id, equipamento, responsavel_entrega, responsavel_devolucao) values (...)
-
-    select * from ativos_tecnologicos at 
-    left join aparelho a on a.funcionario_id = at.funcionario_id
-    left join computador c on c.funcionario_id = at.funcionario_id
-    left join voip v on v.funcionario_id = at.funcionario_id
-    left join software s on s.funcionario_id = at.funcionario_id
-    left join funcionario f on f.id_funcionario = at.funcionario_id
-    limit 100000
-
-    update funcionario set (nome, senha, ua, telefone, email, cargo, setor, ativo)
-    update aparelho set (imei, modelo, chip, chip_ativado, numero, funcionarios_id) where funcionario_id <= 100000 
-    update computador set (servicetag, modelo, tipo_ativo, funcionarios_id) where funcionario_id <= 100000
-    update voip set (mac, modelo, tipo_ativo, numero, funcionarios_id) where funcionario_id <= 100000
-    update software set (software, serial_key, expira) where funcionario_id <= 100000
-    update ativos_tecnologicos set (entrega, devolucao, funcionarios_id, equipamento, responsavel_entrega, responsavel_devolucao) where funcionario_id <= 100000
-
-    delete from funcionario where funcionario_id <= 100000
-    delete from aparelho where funcionario_id <= 100000
-    delete from computador where funcionario_id <= 100000
-    delete from voip where funcionario_id <= 100000
-    delete from software where funcionario_id <= 100000
-    delete from ativos_tecnologicos where funcionario_id <= 100000
-```
-Devido a esta grande diferença, foram realizados os testes presentes nas Figuras 9 e 10. Nestes, foi medido o tempo gasto para o cadastro dos dados em diferentes quantitativos de registros, de 100 até 1 milhão, onde cada “K” representa mil registros e “KK” milhão de registros. O eixo X representa o número de registros processados e no Y o tempo gasto. </p>
+Devido a esta grande diferença, foram realizados os testes presentes nos experimentos 3 e 4. Nestes, foi medido o tempo gasto para o cadastro dos dados em diferentes quantitativos de registros, de 100 até 1 milhão, onde cada “K” representa mil registros e “KK” milhão de registros. O eixo X representa o número de registros processados e no Y o tempo gasto. </p>
 
 ![Experimento 3](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig3.png)
-<center> Médias do tempo de execução para cada operação de cadastro.</center>
+<center> 3. Experimento - Médias do tempo de execução para cada operação de cadastro.</center>
 
 <p align='justify'>
-Durante a realização do teste da figura 3 foi utilizado o modelo relacional proposto na figura 0, o modelo poliglota obteve melhor tempo na execução do cadastro, comparado ao SQL, durante a realização do teste o modelo relacional chegou a durar o triplo do tempo para execução da mesma tarefa no modelo poliglota.
+Durante a realização do teste do experimento 3 foi utilizado o modelo relacional proposto na modelo 1, o modelo poliglota obteve melhor tempo na execução do cadastro, comparado ao SQL, durante a realização do teste o modelo relacional chegou a durar o triplo do tempo para execução da mesma tarefa no modelo poliglota.
 </p>
 
 *MongoDB*
@@ -161,13 +140,89 @@ Durante a realização do teste da figura 3 foi utilizado o modelo relacional pr
 ```
 
 ![Experimento 4](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig4.png)
-<center> Médias do tempo de execução para cada operação de cadastro simples.</center>
+<center> 4. Experimento - Médias do tempo de execução para cada operação de cadastro simples.</center>
 
 <p align='justify'>
-O teste da Figura 4 foi realizado com um cadastro simples, que utiliza apenas a tabela de funcionários como mostra a Figura 0 e, no poliglota desconsidera as listas e Arrays de ativos tecnológicos, endereço, acompanhamentos e anexos de ativos tecnológicos que foram utilizados no teste passado (figura 3). 
+O experimento 4 foi realizado com um cadastro simples, que utiliza apenas a tabela de funcionários como mostra a Figura 0 e, no poliglota desconsidera as listas e Arrays de ativos tecnológicos, endereço, acompanhamentos e anexos de ativos tecnológicos que foram utilizados no teste passado (experimento 3). 
 </p>
 <p align='justify'>
 O modelo poliglota apresentou melhor resultado levando menos tempo para execução do teste em diferentes níveis de registros.
 </p>
 
-> Os scripts utilizados (SQL e Poliglota) são o mesmo do experimento 3, com a diferença a estrutura de dados;
+> Os scripts utilizados (SQL e Poliglota) são o mesmo do experimento 3, com a diferença a estrutura de dados utilizada, o experimento 4 utilizou apenas a tabela de funcionário (observe o modelo 1) no SQL e no Poliglota o modelo 2, utilizando apenas o dado primário (o que estão fora dos arrays e objetos).
+
+Além do tempo, foi verificado o consumo de Memória RAM e de CPU dos bancos de dados durante a execução das operações de CRUD utilizando **100.000 registros**, como ilustrado nos experimentos 5 e 6.
+
+![Experimento 5](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig5.png)
+<center> 5. Experimento - Recursos de Hardware (CPU).</center>
+
+O consumo de CPU foi moderado e baixo durante os testes, destacando o maior consumo de CPU na operação de leitura e remoção de dados, o resultado do teste ficou empatado, cada modelo se destacou no menor consumo de CPU por 2 vezes cada.
+
+![Experimento 6](https://raw.githubusercontent.com/kevenleone/poli-tcc/master/imgs/fig5.png)
+<center> 6. Experimento - Recursos de Hardware (RAM).</center>
+
+<p>
+
+No experimento 6 o modelo Poliglota consumiu mais memória RAM que o SQL em todos as operações, o consumo de memória do SQL foi estável com pouca oscilação, diferente do modelo poliglota que o consumo de memória variou em mais de 100 MBs em uma das operações. 
+
+Os indicadores de desempenho podem variar por alguns fatores, dentre eles Hardware, infraestrutura, base de dados, estrutura dos dados e outros detalhes, um fator que pode explicar essa diferença na execução das operações em diferentes modelos pode ser a forma que cada banco estrutura suas informações, como também as engines utilizadas no SQL e Poliglota que podem não ser a mais otimizada para execução das operações mencionadas em grande escala. 
+</p>
+
+Querys utilizadas nos experimento 2, 5 e 6:
+
+*MongoDB*
+```
+    insert: db.sisati.funcionario.create({data}) 
+    find: db.sisati.funcionario.find().limit(100000)
+    update: db.sisati.funcionario.update({data})
+    delete: db.sisati.funcionario.deleteAll()
+```
+*SQL* 
+```
+    insert into funcionario (nome, senha, ua, telefone, email, cargo, setor, ativo) values (...)
+    insert into aparelho (imei, modelo, chip, chip_ativado, numero, funcionarios_id) values (...)
+    insert into computador (servicetag, modelo, tipo_ativo, funcionarios_id) values (...) 
+    insert into voip (mac, modelo, tipo_ativo, numero, funcionarios_id values(...)
+    insert into software (software, serial_key, expira) values (...)
+    insert into ativos_tecnologicos (entrega, devolucao, funcionarios_id, equipamento, responsavel_entrega, responsavel_devolucao) values (...)
+
+    select * from ativos_tecnologicos at 
+    left join aparelho a on a.funcionario_id = at.funcionario_id
+    left join computador c on c.funcionario_id = at.funcionario_id
+    left join voip v on v.funcionario_id = at.funcionario_id
+    left join software s on s.funcionario_id = at.funcionario_id
+    left join funcionario f on f.id_funcionario = at.funcionario_id
+    limit 100000
+
+    update funcionario set (nome, senha, ua, telefone, email, cargo, setor, ativo)
+    update aparelho set (imei, modelo, chip, chip_ativado, numero, funcionarios_id) where funcionario_id <= 100000 
+    update computador set (servicetag, modelo, tipo_ativo, funcionarios_id) where funcionario_id <= 100000
+    update voip set (mac, modelo, tipo_ativo, numero, funcionarios_id) where funcionario_id <= 100000
+    update software set (software, serial_key, expira) where funcionario_id <= 100000
+    update ativos_tecnologicos set (entrega, devolucao, funcionarios_id, equipamento, responsavel_entrega, responsavel_devolucao) where funcionario_id <= 100000
+
+    delete from funcionario where funcionario_id <= 100000
+    delete from aparelho where funcionario_id <= 100000
+    delete from computador where funcionario_id <= 100000
+    delete from voip where funcionario_id <= 100000
+    delete from software where funcionario_id <= 100000
+    delete from ativos_tecnologicos where funcionario_id <= 100000
+```
+
+> OBS.1 nas querys do SQL considere os valores dos inserts e update valores aleatórios de acordo com o modelo proposto do modelo 1.
+
+> OBS.2: Nas querys do MongoDB considere a variável "data" como um objeto formato Json contendo a estrutura de dados proposta na fígura do modelo 2, de valor aleatório, que é gerada pelo script do arquivo Job.js"
+
+> OBS3.: Os testes poliglota se referem a MongoDB e Redis, porém como o tempo de execução das operações de CRUD no Redis leva cerca de milissegundos a poucos segundos suas operações não foram descritas no texto, porém seus valores foram contabilizados nos valores atribuidos aos experimentos. O modelo referido é o 3.
+
+## Considerações Finais
+<p>
+Este artigo teve como objetivo conhecer a persistência poliglota e como esta pode ser empregada em projetos de pequeno a grande porte. Compatível com a maioria das linguagens de programação do mercado, esse modelo pode ser utilizado com diferentes bancos de dados no desenvolvimento de software.
+</p>
+
+<p>
+A análise apresenta uma possibilidade diferente de lidar com o desenvolvimento de sistemas voltadas aos dias atuais, com a grande variância das informações os bancos de dados não relacionais podem ser agregados em diversas etapas de um sistema de informação. </p>
+
+<p>
+Este trabalho pode auxiliar na tomada de decisão de desenvolvedores e administradores de sistemas que pretendem realizar migração de um modelo de dados homogêneo para a persistência poliglota para atender necessidades específicas.
+</p>
